@@ -1,0 +1,11 @@
+两种高清方案参考：
+1. https://github.com/ant-design/ant-design-mobile/wiki/antd-mobile-0.8-%E4%BB%A5%E4%B8%8A%E7%89%88%E6%9C%AC%E3%80%8C%E9%AB%98%E6%B8%85%E3%80%8D%E6%96%B9%E6%A1%88%E8%AE%BE%E7%BD%AE
+2. https://github.com/amfe/lib-flexible
+
+
+利弊：
+1. 优点：font-size 可以使用rem（根size根据dpr 50，100，150）
+   缺点：由于不是根据clientWidth动态修改html font-size，需要伸缩的盒子就不能使用rem
+        例如 width就需要使用flex布局或百分比；height最好不要给 可以写min-height
+2。优点: 除了font-size 不可以使用rem，其他样式都可以使用rem 因为是动态修改html font-size
+   缺点：字体不能使用rem，会出现13.xx，15.xx，需要写很多 data-dpr font-size

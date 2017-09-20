@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="utf-8" />
+  <title></title>
+  <style type="text/css">
+   html{font-family: "microsoft yahei";overflow: hidden;}
+   html{height: 100%;padding: 0;margin: 0;}
+   
+   a{text-decoration: none;outline: none;}
+   
+   .title{color: #ddd;text-shadow: 2px 2px 5px #000;padding: 80px 0px 0px 100px;}
+   .main,.img_main{float: left;background-color: rgba(255,255,255,.7);border-radius: 4px;padding: 20px;margin: 0 3px;}
+   .main{width: 40%;margin-left:100px;}
+   .img_main{max-width: 40%;}
+   .preview{width: 100%;}
+   
+   .select-file{border:1px solid #9B59B6;position: relative;}
+   .select-file:after{content: '';display: block;clear: both;}
+   .select-file-title,.select-file-btn{float: left;line-height: 30px;height: 30px;}
+   .select-file-title{width: 80%;}
+   .select-file-btn{width: 20%;background-color: #8E44AD;text-align: center;color: #fff;transition: background-color .5s;}
+   .select-file-btn:hover{background-color: #1ABC9C;}
+   
+   .base64-text{background-color:transparent;height: 300px;width: calc(100% - 6px);resize:none;overflow: auto;border: 1px solid #9B59B6;margin-top: 10px;word-break: break-all;}
+   
+  </style>
+ </head>
+ <body>
+  <h1 class="title">图片转Base64</h1>
+  <div class="main">
+   <div class="control">
+    <div class="select-file">
+     <div class="select-file-title"></div>
+     <a href="javascript:;" class="select-file-btn">选择文件</a>
+    </div>
+   </div>
+   <div class="control">
+    <textarea class="base64-text" readonly></textarea>
+   </div>
+  </div>
+  <div class="img_main">
+   <img src="" class="preview"/>
+  </div>
+ 
+  <script type="text/javascript">
+   var inputFile =  document.createElement('input');
+    inputFile.type = 'file';
+   var selectFile = document.querySelector('.select-file');
+   var base64Text = document.querySelector('.base64-text');
+   var preview = document.querySelector('.preview');
+   
+   var reader = new FileReader();
+   reader.onload = function(){
+    base64Text.innerText = this.result;
+    preview.src = this.result;
+   };
+   inputFile.addEventListener('change', function(){
+    selectFile.querySelector('.select-file-title').innerHTML = this.value;
+    if(this.files.length == 0){
+     base64Text.innerText = '';
+     return;
+    }
+    var file = inputFile.files[0];
+    base64Text.placeholder = '';
+    if(!(/^image/.test(file.type))){
+     base64Text.placeholder = '不是图片文件';
+     return;
+    }
+    reader.readAsDataURL(file);
+   });
+   
+   selectFile.addEventListener('click', function(){
+    inputFile.click();
+   });
+  </script>
+ </body>
+</html>

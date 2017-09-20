@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<!-- saved from url=(0096)http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/ -->
+<html lang="zh-CN"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="张鑫旭的个人博客_web前端技术文章_漫谈js自定义事件、DOM/伪DOM自定义事件">
+<meta name="keywords" content="web前端,HTML5,CSS3,jQuery,SVG,canvas">
+<meta name="author" content="张鑫旭,zhangxinxu">
+<title>漫谈js自定义事件、DOM/伪DOM自定义事件 «  张鑫旭-鑫空间-鑫生活</title>
+<link rel="stylesheet" href="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/style.css">
+<link rel="pingback" href="http://www.zhangxinxu.com/wordpress/xmlrpc.php">
+ 
+<link rel="alternate" type="application/rss+xml" title="张鑫旭-鑫空间-鑫生活 » Feed" href="http://www.zhangxinxu.com/wordpress/feed/">
+<link rel="alternate" type="application/rss+xml" title="张鑫旭-鑫空间-鑫生活 » 评论Feed" href="http://www.zhangxinxu.com/wordpress/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="张鑫旭-鑫空间-鑫生活 » 漫谈js自定义事件、DOM/伪DOM自定义事件评论Feed" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/feed/">
+<link rel="stylesheet" id="wp-pagenavi-css" href="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/pagenavi-css.css" type="text/css" media="all">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.zhangxinxu.com/wordpress/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.zhangxinxu.com/wordpress/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="观点：不要太依赖JavaScript库" href="http://www.zhangxinxu.com/wordpress/2012/03/%e8%a7%82%e7%82%b9%ef%bc%9a%e4%b8%8d%e8%a6%81%e5%a4%aa%e4%be%9d%e8%b5%96javascript%e5%ba%93/">
+<link rel="next" title="翻译：关于表单每个设计师都必须知道的10件事" href="http://www.zhangxinxu.com/wordpress/2012/04/%e8%a1%a8%e5%8d%95%e8%ae%be%e8%ae%a1%e5%8d%81%e4%ba%8b%e9%9c%80%e7%9f%a5-10-things-every-designer-needs-know-about-forms/">
+<meta name="generator" content="WordPress 4.1.16">
+<link rel="canonical" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/">
+<link rel="shortlink" href="http://www.zhangxinxu.com/wordpress/?p=2330">
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<link href="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/bdsstyle.css" rel="stylesheet" type="text/css"><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body class="single single-post postid-2330 single-format-standard" youdao="bind"><iframe frameborder="0" style="display: none;" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/saved_resource.html"></iframe><div id="bdshare_s" style="display: block;"><iframe id="bdsIfr" style="position:absolute;display:none;z-index:9999;" frameborder="0" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/saved_resource(1).html"></iframe><div id="bdshare_l" style="display: none;"><div id="bdshare_l_c"><h6>分享到</h6><ul><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_mshare mshare">一键分享</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_qzone qqkj">QQ空间</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_tsina xlwb">新浪微博</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_bdysc bdysc">百度云收藏</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_renren rrw">人人网</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_tqq txwb">腾讯微博</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_bdxc bdxc">百度相册</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_kaixin001 kxw">开心网</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_tqf txpy">腾讯朋友</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_tieba bdtb">百度贴吧</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_douban db">豆瓣网</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_tsohu shwb">搜狐微博</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_bdhome bdhome">百度新首页</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_sqq sqq">QQ好友</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_thx thx">和讯微博</a></li><li><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="bds_more">更多...</a></li></ul><p><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" class="goWebsite">百度分享</a></p></div></div></div>
+<div id="page">
+<div id="header" role="banner">
+	<div id="headerimg">
+		<a href="http://www.zhangxinxu.com/" class="page_logo">张鑫旭-鑫空间-鑫生活</a>
+		<div class="description">it's my whole life!</div>
+	</div>
+    <div id="menubar">
+<ul class="menu_tab">
+<li class="">
+<a href="http://www.zhangxinxu.com/" class="boss">网站首页</a>
+<a href="http://www.zhangxinxu.com/php/microCode.php">我的微码</a>
+<a href="http://www.zhangxinxu.com/php/advise.php">建议反馈</a>
+</li>
+<li class="on">
+<a class="boss" href="http://www.zhangxinxu.com/wordpress/">前端技术</a>
+<a href="http://www.zhangxinxu.com/wordpress/?cat=3">css</a>
+<a href="http://www.zhangxinxu.com/wordpress/?cat=5">js/jQuery</a>
+<a href="http://www.zhangxinxu.com/wordpress/?cat=198">翻译</a>
+</li>
+<li class="">
+<a class="boss" href="http://www.zhangxinxu.com/life/">生活与创作</a>
+<a href="http://www.zhangxinxu.com/life/?cat=3">生活</a>
+<a href="http://www.zhangxinxu.com/life/?cat=5">散文</a>
+<a href="http://www.zhangxinxu.com/life/?cat=4">小说</a>
+</li>
+<li class="">
+<span class="boss">前端在线资源</span>
+<a href="http://www.zhangxinxu.com/css3/">CSS3参考</a>
+<a href="http://www.zhangxinxu.com/jq/api14/">jQuery1.4参考</a>
+</li>
+</ul><form method="get" id="searchform" action="http://www.zhangxinxu.com/wordpress/">
+<label class="hidden" for="s">Search for:</label>
+<div><input type="search" placeholder="翻页太辛苦，试试直接搜索" value="" name="s" id="s">
+<input type="submit" id="searchsubmit" data-value="Search" value="搜索">
+</div>
+</form>
+    </div>
+</div>
+<script type="text/javascript" async="" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/ga.js"></script><script src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/ca-pub-0090627341039040.js"></script><script>
+var isSlideHide = false;
+if (window.localStorage) {
+	var slideHideTime = +localStorage.slideHideTime;
+	var slideNowTime = +new Date();
+	if (screen.width < 1600 && slideNowTime - slideHideTime < 1000*60*30) {
+		// 不足半小时
+		isSlideHide = true;
+		document.getElementById("page").className = "slide_hide";
+	} else if (slideHideTime > slideNowTime) {
+		localStorage.removeItem('slideHideTime');
+	}
+}
+</script>
+<div class="the_main">
+	<div id="content" class="widecolumn" role="main">
+    <div class="shink_rel"><a href="javascript:" id="shinkSlide" class="shink_a" title="收起右边栏" style="display: inline;">►</a></div>
+<script>if (window.localStorage && window.isSlideHide) {
+	(function() {
+		var eleShink = document.getElementById("shinkSlide");	
+		eleShink.title = "展开右边栏";
+		// 左箭头
+		eleShink.innerHTML = "&#x25c4;";
+	})();
+}</script>
+	
+		<div class="navigation">
+			<div class="alignleft">« <a href="http://www.zhangxinxu.com/wordpress/2012/03/%e8%a7%82%e7%82%b9%ef%bc%9a%e4%b8%8d%e8%a6%81%e5%a4%aa%e4%be%9d%e8%b5%96javascript%e5%ba%93/" rel="prev">观点：不要太依赖JavaScript库</a></div>
+			<div class="alignright"><a href="http://www.zhangxinxu.com/wordpress/2012/04/%e8%a1%a8%e5%8d%95%e8%ae%be%e8%ae%a1%e5%8d%81%e4%ba%8b%e9%9c%80%e7%9f%a5-10-things-every-designer-needs-know-about-forms/" rel="next">翻译：关于表单每个设计师都必须知道的10件事</a> »</div>
+		</div>
+
+		<div class="post-2330 post type-post status-publish format-standard hentry category-js tag-addeventlistener tag-attachevent tag-createevent tag-dispatchevent tag-dom tag-javascript tag-onpropertychange tag-140 tag-508 tag-407 tag-449 tag-703" id="post-2330">
+			<h2>漫谈js自定义事件、DOM/伪DOM自定义事件<span id="qrCode" class="qr_code"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/api.php"></span></h2>
+			<div class="entry">
+            	<div class="postmetadata alt">
+					<small>
+												这篇文章发布于 2012年04月1日，星期日，18:06，归类于 <a href="http://www.zhangxinxu.com/wordpress/category/js/js%e5%ae%9e%e4%be%8b/" rel="category tag">js实例</a>。                        阅读 131841 次, 今日 96 次					</small>
+				</div>
+				<p class="link">by <a href="http://www.zhangxinxu.com/">zhangxinxu</a> from <a href="http://www.zhangxinxu.com/">http://www.zhangxinxu.com</a><br>
+本文地址：<a href="http://www.zhangxinxu.com/wordpress/?p=2330">http://www.zhangxinxu.com/wordpress/?p=2330</a></p>
+<h3>一、说明、引言</h3>
+<p>我JS还是比较薄弱的，本文的内容属于边学边想边折腾的碎碎念，可能没什么条理，可能有表述不准确的地方，可能内容比较拗口生僻。如果您时间紧迫，或者JS造诣已深，至此您就可以点击右侧广告（木有？则RSS或盗版）然后撤了。</p>
+<p>事件是个大课题，真要从断奶开始讲起的话，可以写个12期的连载。关于JS事件的文章（类似DOM/BOM事件模型，IE与其他浏览器事件差异，DOM1/DOM2事件定义等）落叶般随处可见。熟豆子反复炒一点意思都没有，因此，这里谈谈自己感兴趣的自定义事件以及周边。</p>
+<p>所谓自定义事件，就是有别于有别于带有浏览器特定行为的事件(类似<code>click</code>, <code>mouseover</code>, <code>submit</code>, <code>keydown</code>等事件)，事件名称可以随意定义，可以通过特定的方法进行添加，触发以及删除。</p>
+<h3>二、JS自定义事件</h3>
+<p>循序渐进便于接收。慢慢来~~</p>
+<p>先看个简单的事件添加的例子：</p>
+<div class="zxx_code">
+<pre>element.addEventListener("click", function() {
+    <span style="color:green;">// 我是临时工</span>
+});</pre>
+</div>
+<p>这是个简单的为DOM元素分配事件处理函数的方法(IE 不支持)，有别于：</p>
+<div class="zxx_code">
+<pre>element.onclick = function() {
+   <span style="color:green;">// 我是临时工</span> 
+};</pre>
+</div>
+<p><code>addEventListener()</code>可以为元素分配多个处理函数（而非覆盖），因此，我们可以继续：</p>
+<div class="zxx_code">
+<pre>element.addEventListener("click", function() {
+    <span style="color:green;">// 我是二代临时工</span>
+});</pre>
+</div>
+<p>然后，当<code>element</code>被click(点击)的时候，就会连续触发“临时工”和“二代临时工”函数。</p>
+<p><strong>抽象→具象→本质→数据层</strong><br>你有没有觉得这种行为表现有点类似于往长枪里面塞子弹(add)，（扣动扳手 – click）发射的时候按照塞进去的顺序依次出来。这种行为表现为我们实现自定义事件提供了思路：我们可以定义一个数组，当添加事件的时候，我们push进去这个事件处理函数；当我们执行的时候，从头遍历这个数组中的每个事件处理函数，并执行。</p>
+<p>当多个事件以及对应数据处理函数添加后，我们最终会得到一个类似下面数据结构的对象：</p>
+<div class="zxx_code">
+<pre>_listener = {
+    "click": [func1, func2],
+    "custom": [func3],
+    "defined": [func4, func5, func6]
+}
+</pre>
+</div>
+<p>因此，如果我们脱离DOM, 纯碎在数据层面自定义事件的话，我们只要以构建、遍历和删除<code>_listener</code>对象为目的即可。</p>
+<p><strong>函数式实现</strong><br>还是那句话，循序渐进，我们先看看函数式的实现（只展示骨干代码）：</p>
+<div class="zxx_code">
+<pre>var _listener = {};
+var addEvent = function(type, fn) {
+    <span style="color:green;">// 添加</span>
+};
+var fireEvent = function(type) {
+    <span style="color:green;">// 触发</span>
+};
+var removeEvent = function(type, fn) {
+    <span style="color:green;">// 删除</span>
+};
+</pre>
+</div>
+<p>上面的代码虽然显得比较初级，但是目的亦可实现。例如：</p>
+<div class="zxx_code">
+<pre>addEvent("alert", function() {
+    alert("弹出！");
+});
+
+<span style="color:green;">// 触发自定义alert事件</span>
+fireEvent("alert");</pre>
+</div>
+<p>但是，函数式写法缺点显而易见，过多暴露在外的全局变量（全局变量是魔鬼），方法无级联等。这也是上面懒得显示完整代码的原因，略知即可。</p>
+<p><strong>字面量实现</strong><br>众所周知，减少全局变量的方法之一就是使用全局变量（其他如闭包）。于是，我们稍作调整（代码较长，为限制篇幅，使用了滚动条，<a href="javascript:" id="togglePreBtn" title="点击进行展开与收起的JS交互" target="_blank">完整显示点击这里</a> – <span style="color:#999;">JS交互,  RSS中无效果</span>）：</p>
+<div class="zxx_code">
+<pre id="longPreCode" style="height:200px; padding:5px; overflow:auto; resize:both; background-color:#fff;">var Event = {
+    _listeners: {},    
+    <span style="color:green;">// 添加</span>
+    <span style="color:#cd0000;">addEvent</span>: function(type, fn) {
+        if (typeof this._listeners[type] === "undefined") {
+            this._listeners[type] = [];
+        }
+        if (typeof fn === "function") {
+            this._listeners[type].push(fn);
+        }    
+        return this;
+    },
+    <span style="color:green;">// 触发</span>
+    <span style="color:#cd0000;">fireEvent</span>: function(type) {
+        var arrayEvent = this._listeners[type];
+        if (arrayEvent instanceof Array) {
+            for (var i=0, length=arrayEvent.length; i&lt;length; i+=1) {
+                if (typeof arrayEvent[i] === "function") {
+                    arrayEvent[i]({ type: type });    
+                }
+            }
+        }    
+        return this;
+    },
+    <span style="color:green;">// 删除</span>
+    <span style="color:#cd0000;">removeEvent</span>: function(type, fn) {
+    	var arrayEvent = this._listeners[type];
+        if (typeof type === "string" &amp;&amp; arrayEvent instanceof Array) {
+            if (typeof fn === "function") {
+                <span style="color:green;">// 清除当前type类型事件下对应fn方法</span>
+                for (var i=0, length=arrayEvent.length; i&lt;length; i+=1){
+                    if (arrayEvent[i] === fn){
+                        this._listeners[type].splice(i, 1);
+                        break;
+                    }
+                }
+            } else {
+                <span style="color:green;">// 如果仅仅参数type, 或参数fn邪魔外道，则所有type类型事件清除</span>
+                delete this._listeners[type];
+            }
+        }
+        return this;
+    }
+};</pre>
+</div>
+<p>使用类似下面：</p>
+<div class="zxx_code">
+<pre>Event.<span style="color:#cd0000;">addEvent</span>("alert", function() {
+    alert("弹出！");
+});
+
+<span style="color:green;">// 触发自定义alert事件</span>
+Event.<span style="color:#cd0000;">fireEvent</span>("alert");</pre>
+</div>
+<p>您可以狠狠地点击这里：<a class="a_link" target="_blank" href="http://www.zhangxinxu.com/study/201203/js-custom-events-literal.html">JS自定义事件字面量书写demo</a></p>
+<p>默认页面<code>document</code>通过<code>Event.addEvent()</code>绑定了两个自定义的<code>alert</code>事件，因此，此时您点击页面的空白区域（非按钮与示例代码区域），就会有如下图所示的连续两个alert框：</p>
+<p><img data-src="http://image.zhangxinxu.com/image/blog/201203/2012-03-30_212105.png" width="279" height="180"> <img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/2012-03-30_212127.png" width="276" height="180"></p>
+<p>demo页面还有两个按钮，用来清除已经绑定的<code>alert</code>事件。第一个按钮清除所有<code>alert</code>事件，而点击第二个按钮清除第一个<code>alert</code>事件。例如我们点击第二个按钮：</p>
+<p><img data-src="http://image.zhangxinxu.com/image/blog/201203/2012-03-30_212553.png" width="298" height="111"></p>
+<p>清除完毕后再点击页面的空白区域， 您会发现只会弹出“第二个弹出！”字样的弹出框了。这表明，第一个绑定自定义事件被remove掉了。</p>
+<p>字面量实现虽然减少了全局变量，但是其属性方法等都是暴露而且都是唯一的，一旦某个关键属性(如<code>_listeners</code>)不小心在某事件处reset了下，则整个全局的自定义事件都会崩溃。因此，我们可以进一步改进，例如，使用原型链继承，让继承的属性(如<code>_listeners</code>)即使出问题也不会影响全局。</p>
+<p><strong>原型模式实现</strong><br>代码如下（相比上面增加了<code>addEvents</code>, <code>fireEvents</code>, <code>removeEvents</code>多事件绑定、执行与删除方法，篇幅较长，增加滚动限高，<a href="javascript:" id="togglePreBtn2" target="_blank">点击这里完整展示</a> – <span style="color:#999;">JS交互,  RSS中无效果</span>）（一堆代码看得头大，建议直接跳过）：</p>
+<div class="zxx_code">
+<pre id="longPreCode2" style="height:200px; padding:5px; overflow:auto; resize:both; background-color:#fff;">var EventTarget = function() {
+    this._listener = {};
+};
+
+EventTarget.prototype = {
+    constructor: this,
+    <span style="color:#cd0000;">addEvent</span>: function(type, fn) {
+        if (typeof type === "string" &amp;&amp; typeof fn === "function") {
+            if (typeof this._listener[type] === "undefined") {
+                this._listener[type] = [fn];
+            } else {
+                this._listener[type].push(fn);    
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">addEvents</span>: function(obj) {
+        obj = typeof obj === "object"? obj : {};
+        var type;
+        for (type in obj) {
+            if ( type &amp;&amp; typeof obj[type] === "function") {
+                this.addEvent(type, obj[type]);    
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">fireEvent</span>: function(type) {
+        if (type &amp;&amp; this._listener[type]) {
+            var events = {
+                type: type,
+                target: this    
+            };
+            
+            for (var length = this._listener[type].length, start=0; start&lt;length; start+=1) {
+                this._listener[type][start].call(this, events);
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">fireEvents</span>: function(array) {
+        if (array instanceof Array) {
+            for (var i=0, length = array.length; i&lt;length; i+=1) {
+                this.fireEvent(array[i]);
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">removeEvent</span>: function(type, key) {
+        var listeners = this._listener[type];
+        if (listeners instanceof Array) {
+            if (typeof key === "function") {
+                for (var i=0, length=listeners.length; i&lt;length; i+=1){
+                    if (listeners[i] === key){
+                        listeners.splice(i, 1);
+                        break;
+                    }
+                }
+            } else if (key instanceof Array) {
+                for (var lis=0, lenkey = key.length; lis&lt;lenkey; lis+=1) {
+                    this.removeEvent(type, key[lenkey]);
+                }
+            } else {
+                delete this._listener[type];
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">removeEvents</span>: function(params) {
+        if (params instanceof Array) {
+            for (var i=0, length = params.length; i&lt;length; i+=1) {
+                this.removeEvent(params[i]);
+            }    
+        } else if (typeof params === "object") {
+            for (var type in params) {
+                this.removeEvent(type, params[type]);    
+            }
+        }
+        return this;    
+    }
+};</pre>
+</div>
+<p>啰哩吧嗦的代码直接跳过，其实上面代码跟字面量方法相比，就是增加了下面点东西：</p>
+<div class="zxx_code">
+<pre>var EventTarget = function() {
+    this._listener = {};
+};
+
+EventTarget.prototype = {
+    constructor: this,
+    <span style="color:green;">// .. 完全就是字面量模式实现脚本</span>
+};</pre>
+</div>
+<p>然后，需要实现自定义事件功能时候，先<code>new</code>构造下：</p>
+<div class="zxx_code">
+<pre>var myEvents = new EventTarget();
+var yourEvents = new EventTarget();</pre>
+</div>
+<p>这样，即使<code>myEvents</code>的事件容器<code>_listener</code>跛掉，也不会污染<code>yourEvents</code>中的自定义事件(<code>_listener</code>安然无恙)。</p>
+<p>您可以狠狠地点击这里：<a target="_blank" class="a_link" href="http://www.zhangxinxu.com/study/201203/js-custom-events-prototypal.html">原型模式下的JS自定义事件demo</a></p>
+<p>从demo右半区域的源代码展示可以看出如何使用<code>addEvents</code>, <code>fireEvents</code>方法同时添加和触发多个自定义事件的。</p>
+<p><img data-src="http://image.zhangxinxu.com/image/blog/201203/2012-03-31_165054.png" width="492" height="322"></p>
+<p style="color:#888;">//zxx: 下面为广告~~注意不要勿点~~嘻嘻~~</p>
+<div style="width:468px; padding:5px; background-color:#cad5eb;">
+<script type="text/javascript">google_ad_client = "ca-pub-0090627341039040";google_ad_slot = "6836958449";google_ad_width = 468;google_ad_height = 60;</script><script type="text/javascript" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/show_ads.js"></script><ins id="aswift_0_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><iframe width="468" height="60" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/saved_resource(2).html"></iframe></ins></ins>
+</div>
+<div class="hidden"><em>如果您看到下面的文字，可能是由于在其他网站或是RSS中阅读本文，本文原地址：<a href="http://www.zhangxinxu.com/wordpress/?p=2330">http://www.zhangxinxu.com/wordpress/?p=2330</a>，本文作者：<a href="http://www.zhangxinxu.com/">张鑫旭</a>，来自张鑫旭-鑫空间-鑫生活，访问原出处阅读体验更佳。</em></div>
+<h3>三、DOM自定义事件</h3>
+<p>我们平常所使用的事件基本都是与DOM元素相关的，例如点击按钮，文本输入等，这些为自带浏览器行为事件，而自定义事件与这些行为无关。例如：</p>
+<div class="zxx_code">
+<pre>element.addEventListener("alert", function() {
+    alert("弹出！");
+});</pre>
+</div>
+<p>这里的<code>alert</code>就属于自定义事件，后面的<code>function</code>就是自定义事件函数。而这个自定义事件是直接绑定在名为<code>element</code>的DOM元素上的，因此，这个称之为自定义DOM事件。</p>
+<p>由于浏览器的差异，上面的<code>addEventListener</code>在IE浏览器下混不来(<code>attachEvent</code>代替)，因此，为了便于规模使用，我们需要新的添加事件方法名（合并<code>addEventListener</code>和<code>attachEvent</code>），例如<code>addEvent</code>, 并附带事件触发方法<code>fireEvent</code>, 删除事件方法<code>removeEvent</code>，(命名均参考自MooTools库)。</p>
+<p>如何直接在DOM上扩展新的事件处理方法，以及执行自定义的事件呢？</p>
+<p>如果不考虑IE6/7浏览器，我们可以直接在DOM上进行方法扩展。例如添加个<code>addEvent</code>方法：</p>
+<div class="zxx_code">
+<pre><span style="color:#909;">HTMLElement</span>.<span style="color:#069;">prototype</span>.<span style="color:#cd0000;">addEvent</span> = function(type, fn, capture) {
+    var el = this;
+    if (window.addEventListener) {
+        el.addEventListener(type, function(e) {
+            fn.call(el, e);
+        }, capture);
+    } else if (window.attachEvent) {
+        el.attachEvent("on" + type, function(e) {
+            fn.call(el, e);
+        });
+    } 
+};</pre>
+</div>
+<style>.s code{color:#666;}</style>
+<p style="color:#888; font-family:simsun;"><span class="s">//zxx: 上面代码中的<code>HTMLElement</code>表示HTML元素。以一个<code>&lt;p&gt;</code>标签元素举例，其向上寻找原型对象用过会是这样：<code>HTMLParagraphElement.prototype</code> → <code>HTMLElement.prototype</code> → <code>Element.prototype</code> → <code>Node.prototype</code> → <code>Object.prototype</code> → <code>null</code>。这下您应该知道<code>HTMLElement</code>所处的位置了吧，上述代码<code>HTMLElement</code>直接换成<code>Element</code>也是可以的，但是会让其他元素（例如文本元素）也扩展<code>addEvent</code>方法，有些浪费了。</span></p>
+<p>这样，我们就可以使用扩展的新方法给元素添加事件了，例如一个图片元素：</p>
+<div class="zxx_code">
+<pre>elImage.addEvent("click", function() {
+    alert("我是点击图片之后的弹出！");
+});</pre>
+</div>
+<p>由于IE6, IE7浏览器的DOM水平较低，无法直接进行扩展，因此，原型扩展的方法在这两个浏览器下是行不通的。要想让这两个浏览器也支持<code>addEvent</code>方法，只能是页面载入时候遍历所有DOM，然后每个都直接添加<code>addEvent</code>方法了。</p>
+<div class="zxx_code">
+<pre>var elAll = <span style="color:#069;">document.all</span>, lenAll = elAll.length;
+for (var iAll=0; iAll&lt;lenAll; iAll+=1) {
+    elAll[iAll].<span style="color:#cd0000;">addEvent</span> = function(type, fn) {
+        var el = this;
+        el.attachEvent("on" + type, function(e) {
+            fn.call(el, e);
+        });
+    };
+}</pre>
+</div>
+<p>您可以狠狠地点击这里：<a class="a_link" target="_blank" href="http://www.zhangxinxu.com/study/201203/js-dom-events-extend-by-prototype.html">基于DOM扩展自定义方法demo</a></p>
+<p>点击demo页面张含韵小姐年轻时候相片，就会有该图片<code>alt</code>属性值。</p>
+<p><img data-src="http://image.zhangxinxu.com/image/blog/201203/2012-03-31_232024.png" width="413" height="220"></p>
+<p>测试代码如下(demo页面有代码完整展示)：</p>
+<div class="zxx_code">
+<pre>&lt;img id="image" data-src="http://image.zhangxinxu.com/image/study/s/s256/mm1.jpg" alt="年轻的张含韵" /&gt;
+
+document.getElementById("image").<span style="color:#cd0000;">addEvent</span>("click", function() {
+    alert("这是：" + this.alt);    
+});</pre>
+</div>
+<p><strong>只能点到为止</strong><br>直接在DOM上进行事件方法扩展其实是个糟糕的做法，因此，这里我并没有对自定义事件做进一步深入探讨（这个下一部分会讲）。</p>
+<p>基于DOM扩展缺点有：缺少标准无规律、提高冲突可能性、性能以及浏览器支持。<br>扩展名字任意命，很有可能就会与未来DOM浏览器本身支持的方法相互冲突；扩展无规律，很有可能出现A和B同名不同功能的扩展而造成冲突；IE6-7浏览器下所有扩展都要通过遍历支持，其性能开销可想而知；另外IE8对DOM扩展的支持并不完整，例如其支持<code>Element.prototype</code>，却没有<code>HTMLElement.prototype</code>.</p>
+<p>虽然我从事的站点就是基于MooTools库的，但是，我对MooTools库基于DOM扩展方法的做法是不支持的。相反，我更亲近jQuery库的做法，也就是下面要讲的“伪DOM自定义事件”。</p>
+<h3>四、伪DOM自定义事件</h3>
+<p>这里的“伪DOM自定义事件”是自己定义的一个名词，用来区分DOM自定义事件的。例如jQuery库，其是基于包装器（一个包含DOM元素的中间层）扩展事件的，既与DOM相关，又不直接是DOM，因此，称之为“伪DOM自定义事件”。</p>
+<p style="color:#888;"><span class="s">//zxx: 下面即将展示的代码目的在于学习与认识，要想实际应用可能还需要在细节上做些调整。例如，下面测试的包装器仅仅只是包裹DOM元素，并非选择器之类；<code>$</code>符号未增加冲突处理，且几个重要方法都暴露在全局环境中，没有闭包保护等。</span></p>
+<p>原型以及<code>new</code>函数构造不是本文重点，因此，下面这个仅展示：</p>
+<div class="zxx_code">
+<pre>var $ = function(el) {
+    return new _$(el);    
+};
+var _$ = function(el) {
+    this.el = el;
+};
+_$.prototype = {
+    constructor: this,
+    addEvent: function() {
+        <span style="color:green;">// ...</span>
+    },
+    fireEvent: function() {
+        <span style="color:green;">// ...</span>
+    },
+    removeEvent: function() {
+        <span style="color:green;">// ...</span>
+    }
+}</pre>
+</div>
+<p>于是我们就可以使用类似<code>$(dom).addEvent()</code>的语法为元素添加事件了（包括不包含浏览器行为的自定义事件）。</p>
+<p><strong>自定义事件的添加</strong><br>如果只考虑事件添加，我们的工作其实很简单，根据支持情况，<code>addEventListener</code>与<code>attachEvent</code>方法分别添加事件（<code>attachEvent</code>方法后添加事件先触发）即可：</p>
+<div class="zxx_code">
+<pre>addEvent: function(type, fn, capture) {
+    var el = this.el;
+    if (window.addEventListener) {
+        el.addEventListener(type, fn, capture);        
+    } else if (window.attachEvent) {
+        el.attachEvent("on" + type, fn);
+    }
+    return this;
+}
+</pre>
+</div>
+<p>显然，事情不会这么简单，有句古话叫做“上山容易下山难”，自定义事件添加容易，但是如何触发它们呢？——考虑到自定义事件与浏览器行为无关，同时浏览器没有直接的触发事件的方法。</p>
+<p><strong>自定义事件的触发</strong><br>又是不可避免的，由于浏览器兼容性问题，我们要分开说了，针对标准浏览器和IE6/7等考古浏览器。</p>
+<p><strong>1. 对于标准浏览器</strong>，其提供了可供元素触发的方法：<code>element.dispatchEvent()</code>. 不过，在使用该方法之前，我们还需要做其他两件事，及创建和初始化。因此，总结说来就是：</p>
+<div class="zxx_code">
+<pre>document.createEvent()
+event.initEvent()
+element.dispatchEvent()</pre>
+</div>
+<p>举个板栗：</p>
+<div class="zxx_code">
+<pre>$(dom).addEvent("alert", function() {
+    alert("弹弹弹，弹走鱼尾纹~~");
+});
+
+<span style="color:green;">// 创建</span>
+var evt = document.createEvent("HTMLEvents");
+<span style="color:green;">// 初始化</span>
+evt.initEvent("alert", false, false);
+
+<span style="color:green;">// 触发, 即弹出文字</span>
+dom.dispatchEvent(evt);
+</pre>
+</div>
+<p><code>createEvent()</code>方法返回新创建的<code>Event</code>对象，支持一个参数，表示事件类型，具体见下表：</p>
+<table width="400" border="0" cellspacing="1" cellpadding="0" class="params_table">
+<tbody><tr>
+<th scope="col">参数</th>
+<th scope="col">事件接口</th>
+<th scope="col">初始化方法</th>
+</tr>
+<tr>
+<td>HTMLEvents</td>
+<td>HTMLEvent</td>
+<td>initEvent()</td>
+</tr>
+<tr>
+<td>MouseEvents</td>
+<td>MouseEvent</td>
+<td>initMouseEvent()</td>
+</tr>
+<tr>
+<td>UIEvents</td>
+<td>UIEvent</td>
+<td>initUIEvent()</td>
+</tr>
+</tbody></table>
+<p>关于<code>createEvent()</code>方法我自己了解也不是很深入，不想滥竽充数，误人子弟，所以您有疑问我可能作答不了，希望对熟知该方法的人可以做进一步的解释说明（例如事件接口与<code>document</code>关系，<code>UIEvent</code>是什么东西等）。</p>
+<p><code>initEvent()</code>方法用于初始化通过<code>DocumentEvent</code>接口创建的<code>Event</code>的值。支持三个参数：<code>initEvent(eventName, canBubble, preventDefault)</code>. 分别表示事件名称，是否可以冒泡，是否阻止事件的默认操作。</p>
+<p><code>dispatchEvent()</code>就是触发执行了，<code>dom.dispatchEvent(eventObject)</code>, 参数<code>eventObject</code>表示事件对象，是<code>createEvent()</code>方法返回的创建的<code>Event</code>对象。</p>
+<p><strong>2. 对于IE浏览器</strong>，由于向下很多版本的浏览器都不支持<code>document.createEvent()</code>方法，因此我们需要另辟蹊径（据说IE有<code>document.createEventObject()</code>和<code>event.fireEvent()</code>方法，但是不支持自定义事件~~）。</p>
+<p>IE浏览器有不少自给自足的东西，例如下面要说的这个<code>"propertychange"</code>事件，顾名思意，就是属性改变即触发的事件。例如文本框<code>value</code>值改变，或是元素<code>id</code>改变，或是绑定的事件改变等等。</p>
+<p>我们可以利用这个IE私有的东西实现自定义事件的触发，大家可以先花几分钟想想……</p>
+<p><span class="s" style="color:#999;">// zxx: 假设几分钟已经过去了……</span></p>
+<p>大家现在有思路了没？其实说穿了很简单，当我们添加自定义事件的时候，顺便给元素添加一个自定义属性即可。例如，我们添加自定义名为<code>"alert"</code>的自定义事件，顺便我们可以对元素做点小手脚：</p>
+<div class="zxx_code">
+<pre>dom.evtAlert = "2012-04-01";</pre>
+</div>
+<p>再顺便把自定义事件<code>fn</code>塞到<code>"propertychange"</code>事件中：</p>
+<div class="zxx_code">
+<pre>dom.attachEvent("onpropertychange", function(e) {
+    if (e.propertyName == "evtAlert") {
+        fn.call(this);
+    }
+});</pre>
+</div>
+<p>这个，当我们需要触发自定义事件的时候，只要修改DOM上自定义的<code>evtAlert</code>属性的值即可：</p>
+<div class="zxx_code">
+<pre>dom.evtAlert = Math.random();	<span style="color:green;">// 值变成随机数</span></pre>
+</div>
+<p>此时就会触发<code>dom</code>上绑定的<code>onpropertychange</code>事件，又因为修改的属性名正好是<code>"evtAlert"</code>, 于是自定义的<code>fn</code>就会被执行。这就是IE浏览器下事件触发实现的完整机制，应该说讲得还是蛮细的。</p>
+<p><strong>自定义事件的删除</strong><br>与触发事件不同，事件删除，各个浏览器都提供了对于的时间删除方法，如<code>removeEventListener</code>和<code>detachEvent</code>。不过呢，对于IE浏览器，还要多删除一个事件，就是为了实现触发功能额外增加的<code>onpropertychange</code>事件：</p>
+<div class="zxx_code">
+<pre>dom.detachEvent("onpropertychange", evt);</pre>
+</div>
+<p><strong>大综合</strong><br>结合上面所有论述与展示，我们可以得到类似下面的完整代码（为限制篇幅，滚动定高，想查看完整代码推荐去原demo，或是<a href="javascript:" id="togglePreBtn3" target="_blank">点击这里完整显示</a><span style="color:#999;">– js交互，RSS中无效果</span>。）：</p>
+<div class="zxx_code">
+<pre id="longPreCode3" style="height:200px; padding:5px; overflow:auto; resize:both; background-color:#fff;">var $ = function(el) {
+    return new _$(el);    
+};
+var _$ = function(el) {
+    this.el = (el &amp;&amp; el.nodeType == 1)? el: document;
+};
+_$.prototype = {
+    constructor: this,
+    <span style="color:#cd0000;">addEvent</span>: function(type, fn, capture) {
+        var el = this.el;
+        if (window.addEventListener) {
+            el.addEventListener(type, fn, capture);
+            var ev = document.createEvent("HTMLEvents");
+            ev.initEvent(type, capture || false, false);
+            
+            if (!el["ev" + type]) {
+                el["ev" + type] = ev;
+            }  
+        } else if (window.attachEvent) {
+            el.attachEvent("on" + type, fn);    
+            if (isNaN(el["cu" + type])) {
+                <span style="color:green;">// 自定义属性</span>
+                el["cu" + type] = 0; 
+            }   
+            var fnEv = function(event) {
+                if (event.propertyName == "cu" + type) { fn.call(el); }
+            };
+            el.attachEvent("onpropertychange", fnEv);     
+            if (!el["ev" + type]) {
+                el["ev" + type] = [fnEv];
+            } else {
+                el["ev" + type].push(fnEv);    
+            }
+        }
+        return this;
+    },
+    <span style="color:#cd0000;">fireEvent</span>: function(type) {
+        var el = this.el;
+        if (typeof type === "string") {
+            if (document.dispatchEvent) {
+                if (el["ev" + type]) {
+                    el.dispatchEvent(el["ev" + type]);
+                }
+            } else if (document.attachEvent) {
+                el["cu" + type]++;
+            }    
+        }    
+        return this;
+    },
+    <span style="color:#cd0000;">removeEvent</span>: function(type, fn, capture) {
+        var el = this.el;
+        if (window.removeEventListener) {
+            el.removeEventListener(type, fn, capture || false);
+        } else if (document.attachEvent) {
+            el.detachEvent("on" + type, fn);
+            var arrEv = el["ev" + type];
+            if (arrEv instanceof Array) {
+                for (var i=0; i&lt;arrEv.length; i+=1) {
+                    el.detachEvent("onpropertychange", arrEv[i]);
+                }
+            }
+        }
+        return this;    
+    }
+};</pre>
+</div>
+<p>您可以狠狠地点击这里：<a class="a_link" target="_blank" href="http://www.zhangxinxu.com/study/201203/js-custom-dom-events.html">JS DOM自定义事件demo</a></p>
+<p>demo页面中的的张含韵小姐图片上通过级联形式联系添加了三个事件（一个是包含浏览器行为的<code>click</code>事件，还有两个是自定义不含行为的<code>alert</code>事件）：</p>
+<div class="zxx_code">
+<pre>$(elImage)
+    .<span style="color:#cd0000;">addEvent</span>("click", funClick);
+    .<span style="color:#cd0000;">addEvent</span>("alert", funAlert1)
+    .<span style="color:#cd0000;">addEvent</span>("alert", funAlert2);</pre>
+</div>
+<p>而<code>funClick</code>方法中有等同下面脚本：</p>
+<div class="zxx_code">
+<pre>$(e.target).fireEvent("alert");</pre>
+</div>
+<p style="font-family:simsun;">因此，点击图片，才会出现三个弹出框：用户点击图片 → 执行<code>funClick</code> → 第一个弹框 → 执行<code>fireEvent</code> → 触发自定义<code>"alert"</code>事件 → 连续两个<code>"alert"</code>事件弹框</p>
+<p>当点击图片下面的按钮清除掉自定义<code>"alert"</code>事件后，再点击图片就只有一个弹出咯（<code>funAlert1</code>和<code>funAlert2</code>提前回家扫墓去了）！</p>
+<p><img data-src="http://image.zhangxinxu.com/image/blog/201204/2012-04-01_164657.png" width="262" height="130"> <img data-src="http://image.zhangxinxu.com/image/blog/201204/2012-04-01_164737.png" width="378" height="206"></p>
+<p><script>var funPreHeightToggle = function(btn, pre) {btn.onclick = function() {	if (/200/.test(pre.style.height)) {		pre.style.height="auto";		this.innerHTML = this.innerHTML.replace("完整显示", "收起");	} else {		pre.style.height="200px";		this.innerHTML = this.innerHTML.replace("收起", "完整显示");	}	return false;};
+};funPreHeightToggle(document.getElementById("togglePreBtn"), document.getElementById("longPreCode"));funPreHeightToggle(document.getElementById("togglePreBtn2"), document.getElementById("longPreCode2"));funPreHeightToggle(document.getElementById("togglePreBtn3"), document.getElementById("longPreCode3"));</script></p>
+<h3>五、清明节前的结语</h3>
+<p><img data-src="http://image.zhangxinxu.com/image/emtion/laugh.png" alt="鑫表情" width="150" height="150" style="float:left;">
+</p><p>明天回家，很显然，我要钓鱼钓死在河边上。</p>
+<p>时间等客观原因，本文展示的些脚本并未做非常详尽严谨的测试，因此，不建议直接Copy到实际项目中应用，更多旨在相互交流与学习。例如在IE浏览器下，最后的“伪DOM自定义事件”，click事件通过点击触发时的事件类型(<code>event.type</code>)是<code>click</code>, 但是通过<code>fireEvent</code>触发的时候事件类型是<code>propertychange</code>, 这些细节在测试学习的时候都是可以忽略的，但是要是实际应用，这都是需要完善的。</p>
+<p>本想以很通俗易懂的语言阐述我想表达的内容，但是，现在回过头看看，做得并不好，术语，啰嗦的话语还是显得多了点，这方面的功力还需要加强，或许是本身理解不透彻的缘故，无法驾驭自然无法语言通俗化。</p>
+<p>虽说自己JS方面的学习比两年前要好多了（那个时候连<code>addEventListener</code>和<code>attachEvent</code>放在一起干嘛的都不清楚），但是心里清楚的很，JS还是很薄弱的，跟真正优秀的JS开发人员相比，要积累的还有很多。什么时候能够像看有色小说一样把《JavaScript语言精粹》一书读下来，恩，估计可以有脸得瑟得瑟了~~</p>
+<p>本文涉及的一些知识点欢迎补充提点，有表述不准确的地方欢迎指正。</p>
+<p>最后，祝大家清明节快乐！额？怎么这句话怪怪的——上坟一般快乐不起来吧~~那大家祝我清明回家钓鱼大丰收，大爆箱！！哈哈！！</p>
+<p>原创文章，转载请注明来自<a href="http://www.zhangxinxu.com/" target="_blank">张鑫旭-鑫空间-鑫生活</a>[<a href="http://www.zhangxinxu.com/" target="_blank">http://www.zhangxinxu.com</a>]<br>
+本文地址：<a href="http://www.zhangxinxu.com/wordpress/?p=2330" target="_blank">http://www.zhangxinxu.com/wordpress/?p=2330</a></p>
+<div class="hidden">
+<p>觉得这里的文章不错，希望他一直走下去？您可以：<a target="_blank" href="https://me.alipay.com/zhangxinxu" title="小小赞助大大帮助"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/pay_encourage.png" width="159" height="37" alt="支付鼓励" align="absmiddle"></a></p>
+</div>
+<p>（本篇完）<span class="ins_txt">// 有话要说？点击<a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#comment" title="点击定位到评论">这里</a>。想要打赏？点击<a href="javascript:" id="alipayA" title="点击显示二维码">这里</a>？</span></p>
+<div id="adHaiTang" class="da_article da_bottom">
+                <div class="da_ht">
+                    <span class="l hidden">听说、你想学JS？不妨</span>
+                    <a href="javascript:" class="r hidden" title="不敢兴趣">×</a>
+                </div>
+                <a href="http://apeclass.cn/1212/index.html" target="_blank" class="da_bottom_ht" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;HAITANG&#39;, &#39;haitang&#39;, &#39;Not float&#39;]);"></a>
+            </div><div class="similarity"><div class="similar_title">相关文章</div><ul><li><a href="http://www.zhangxinxu.com/wordpress/2013/01/understand-this-of-object-literals/">我对原型对象中this的一个懵懂错误认识</a> (0.685)</li><li><a href="http://www.zhangxinxu.com/wordpress/2013/07/jquery-%e5%8e%9f%e7%90%86-%e6%9c%ba%e5%88%b6/">jQuery诞生记-原理与机制</a> (0.569)</li><li><a href="http://www.zhangxinxu.com/wordpress/2011/01/js%e9%9d%a2%e5%90%91%e6%95%b0%e6%8d%ae%e7%bc%96%e7%a8%8bdop%e4%b8%80%e7%82%b9%e5%88%86%e4%ba%ab/">js面向数据编程(DOP)一点分享</a> (0.500)</li><li><a href="http://www.zhangxinxu.com/wordpress/2010/05/%e4%bb%a3%e7%a0%81%e7%b2%be%e7%ae%80-%e5%b8%b8%e8%a7%81javascript%e4%bb%a3%e7%a0%81%e7%bc%a9%e5%86%99%e4%b8%be%e4%be%8b/">代码精简 - 常见JavaScript代码缩写举例</a> (0.404)</li><li><a href="http://www.zhangxinxu.com/wordpress/2010/10/%e7%bf%bb%e8%af%91-%e9%ab%98%e8%b4%a8%e9%87%8fjavascript%e4%bb%a3%e7%a0%81%e4%b9%a6%e5%86%99%e5%9f%ba%e6%9c%ac%e8%a6%81%e7%82%b9/">翻译-高质量JavaScript代码书写基本要点</a> (0.328)</li><li><a href="http://www.zhangxinxu.com/wordpress/2012/10/ecmascript-es5-bind-array-slice-call-apply/">ECMAScript 5(ES5)中bind方法、自定义及小拓展</a> (0.328)</li><li><a href="http://www.zhangxinxu.com/wordpress/2010/07/%e7%bf%bb%e8%af%91-css%e7%bb%a7%e6%89%bf%e8%af%a6%e8%a7%a3/">翻译 - CSS继承详解</a> (0.264)</li><li><a href="http://www.zhangxinxu.com/wordpress/2010/07/mootools%e5%92%8cjquery%e5%ba%93%e7%bb%a7%e6%89%bf%e5%ae%9e%e7%8e%b0class%e5%88%87%e6%8d%a2%e5%af%b9%e6%af%94/">MooTools和jQuery库继承实现class切换对比</a> (0.193)</li><li><a href="http://www.zhangxinxu.com/wordpress/2011/09/css%e9%a1%b9%e7%9b%aeminimum-page%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d/">CSS项目Minimum Page简单介绍</a> (0.169)</li><li><a href="http://www.zhangxinxu.com/wordpress/2012/03/%e5%b0%8ftip-css%e5%90%8e%e4%bb%a3%e9%80%89%e6%8b%a9%e5%99%a8%e5%8f%af%e8%83%bd%e7%9a%84%e9%94%99%e8%af%af%e8%ae%a4%e8%af%86/">小tip: CSS后代选择器可能的错误认识</a> (0.169)</li><li><a href="http://www.zhangxinxu.com/wordpress/2012/11/page-visibility-api-introduction-extend/">Page Visibility(页面可见性) API介绍、微拓展</a> (RANDOM - 0.027)</li></ul></div><!-- Tag -->				<div class="wp_share_box">
+                	<!-- Baidu Button BEGIN -->
+<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+<span class="bds_more">分享到：</span>
+<a class="bds_tsina" title="分享到新浪微博" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="bds_qzone" title="分享到QQ空间" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="bds_tqq" title="分享到腾讯微博" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="bds_t163" title="分享到网易微博" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="bds_douban" title="分享到豆瓣网" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="bds_tsohu" title="分享到搜狐微博" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#"></a>
+<a class="shareCount" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" title="累计分享12次">12</a>
+</div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1954626" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/bds_s_v2.js"></script>
+
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END --> 
+                </div>
+								<p>标签： <a href="http://www.zhangxinxu.com/wordpress/tag/addeventlistener/" rel="tag" target="_blank">addEventListener</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/attachevent/" rel="tag" target="_blank">attachEvent</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/createevent/" rel="tag" target="_blank">createEvent</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/dispatchevent/" rel="tag" target="_blank">dispatchEvent</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/dom/" rel="tag" target="_blank">dom</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/javascript/" rel="tag" target="_blank">javascript</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/onpropertychange/" rel="tag" target="_blank">onpropertychange</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/%e5%85%bc%e5%ae%b9%e6%80%a7/" rel="tag" target="_blank">兼容性</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/%e5%8e%9f%e5%9e%8b/" rel="tag" target="_blank">原型</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/%e5%af%b9%e8%b1%a1%e5%ad%97%e9%9d%a2%e9%87%8f/" rel="tag" target="_blank">对象字面量</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/%e7%bb%a7%e6%89%bf/" rel="tag" target="_blank">继承</a>, <a href="http://www.zhangxinxu.com/wordpress/tag/%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/" rel="tag" target="_blank">自定义事件</a></p>			</div>
+		</div>
+        
+        <h3 class="da_title">赞助商广告<span class="sup_span">(<a href="http://www.zhangxinxu.com/sp/support.html" target="_blank">我也要赞助</a>)</span>：</h3>
+        <div class="ad_col2">
+			<div id="adZhuFeng" class="da_zf_x da_bottom">
+            	<div class="da_zf">
+                    <span class="l hidden">如果你月薪不足20K，不妨</span>
+                    <a href="javascript:" class="r hidden" title="不敢兴趣">×</a>
+                </div>
+            	<a href="http://www.zhufengpeixun.cn/customize/node/index.html" target="_blank" class="da_bottom_n" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;ZHUFENG&#39;, &#39;zhufeng&#39;, &#39;Not float&#39;]);"></a>
+            </div>
+            <!-- 妙味 -->
+            <div id="adMW" class="da_zf_x da_bottom">
+				<div class="da_ym">
+                    <span class="l hidden">这里有最全的web前端开发视频</span>
+                    <a href="javascript:" class="r hidden" title="不敢兴趣">×</a>
+                </div>
+            	<a href="http://www.miaov.com/?form=zhangxinxu.com" target="_blank" class="da_bottom_y" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;MWAD&#39;, &#39;MiaoWei&#39;, &#39;Not float&#39;]);"></a>
+            	<!-- <a href="/sp/support.html" target="_blank" class="da_bottom_y"></a> -->
+            </div>
+        </div>
+        <div class="ad_col2">
+            <div id="adYideng" class="da_bottom">
+                <div class="da_yd">
+                    <span class="l hidden">如果你有1~3年前端开发经验，不妨</span>
+                    <a href="javascript:" class="r hidden" title="不敢兴趣">×</a>
+                </div>
+                <a href="http://www.yidengxuetang.com/recruit/?f=zhangxinxu.com" target="_blank" class="da_bottom_w" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;YIDENG&#39;, &#39;yideng&#39;, &#39;Not float&#39;]);"></a>
+            </div>
+            
+        </div>
+
+	﻿
+<div id="respond">
+<h3 id="comments" class="respond_title">发表评论（目前39条评论）</h3>
+<div id="cancel-comment-reply"> 
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#respond" style="display:none;">点击这里取消回复。</a></small>
+</div> 
+
+
+<form action="http://www.zhangxinxu.com/wordpress/wp-comments-post.php" method="post" id="commentform" novalidate="">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required="true" required="">
+<label for="author"><small>名称 (必须)</small></label></p>
+
+<p><input type="email" name="email" id="email" value="" size="22" tabindex="2" aria-required="true" required="">
+<label for="email"><small>邮件地址(不会被公开) (必须)</small></label></p>
+
+<p><input type="url" name="url" id="url" value="" size="22" tabindex="3">
+<label for="url"><small>网站</small></label></p>
+
+
+<!--<p><small><strong>XHTML：</strong>您可以使用这些标签：<code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="提交评论"><span id="commRem" class="ml20" style="color:#cd0000;"></span>
+<input type="hidden" name="comment_post_ID" value="2330" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+ 
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e45501993d"></p><p style="display: none;"></p>
+<input type="hidden" id="ak_js" name="ak_js" value="1490859975904"></form>
+
+</div>
+
+
+<!-- You can start editing here. -->
+
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+
+	<ol class="commentlist">
+			<li class="comment even thread-even depth-1 parent" id="comment-327363">
+				<div id="div-comment-327363" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/c8c986d9839ebd2620802f754c08e179" class="avatar avatar-32" height="32" width="32">			<cite class="fn">侯小贤</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-327363">
+			2016年09月19日 16:16</a>		</div>
+
+		<p>张老师好，自定义事件有什么用啊，最终还不是要浏览器的事件去触发，那样子还不如直接当做一个函数写在click事件里面，我就想知道自定义事件一般在哪里用，谢谢老师了</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=327363#respond" onclick="return addComment.moveForm( &quot;div-comment-327363&quot;, &quot;327363&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给侯小贤">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-347703">
+				<div id="div-comment-347703" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/7befd858ce9e82b641df3fa58a7d083e" class="avatar avatar-32" height="32" width="32">			<cite class="fn">Arui</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-347703">
+			2017年02月13日 20:15</a>		</div>
+
+		<p>个人觉得，基于状态执行的场景时可以使用。比如一个对象3种状态：creat,active,destroy. 当我实例化这个对象，在一些业务逻辑下需要去执行某个特定的状态时，比较适合使用自定义事件。   只是个人理解…</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=347703#respond" onclick="return addComment.moveForm( &quot;div-comment-347703&quot;, &quot;347703&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给Arui">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-326125">
+				<div id="div-comment-326125" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/89fa6a53ea9eb9b2bf08378c77ce64ca" class="avatar avatar-32" height="32" width="32">			<cite class="fn">晴晴</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-326125">
+			2016年09月4日 17:14</a>		</div>
+
+		<p>博主谦虚，写的很好，特别受益，祝每天开心，保重身体，多写好文。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=326125#respond" onclick="return addComment.moveForm( &quot;div-comment-326125&quot;, &quot;326125&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给晴晴">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-324888">
+				<div id="div-comment-324888" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/8cd69001fb71f7066ea6a0eef5e85ddd" class="avatar avatar-32" height="32" width="32">			<cite class="fn">ziv</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-324888">
+			2016年08月22日 19:54</a>		</div>
+
+		<p>广告多的也是醉人。。。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=324888#respond" onclick="return addComment.moveForm( &quot;div-comment-324888&quot;, &quot;324888&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给ziv">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 parent" id="comment-324601">
+				<div id="div-comment-324601" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/fcf06e09a35e95fa2e94201e60952f3d" class="avatar avatar-32" height="32" width="32">			<cite class="fn">fengchenxiujisd</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-324601">
+			2016年08月18日 10:45</a>		</div>
+
+		<p>“原型模式下的JS自定义事件demo…”</p>
+<p>demo中的右栏倒数第四行 ‘ …if (!target || !/input|pre/i.test(target.tagName)) {…’<br>
+其中的 !target 为什么要取反呢?<br>
+谢谢.</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=324601#respond" onclick="return addComment.moveForm( &quot;div-comment-324601&quot;, &quot;324601&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给fengchenxiujisd">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-348843">
+				<div id="div-comment-348843" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/71b138811383c595d03ddcd3d78901b7" class="avatar avatar-32" height="32" width="32">			<cite class="fn">Jasery</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-348843">
+			2017年02月25日 11:29</a>		</div>
+
+		<p>因为后面需要用到target.tagName，如果target为undifined的话就报错了，不会触发后面的事件，!target可以确保target为undifined时也可以触发后面的事件。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=348843#respond" onclick="return addComment.moveForm( &quot;div-comment-348843&quot;, &quot;348843&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给Jasery">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-324079">
+				<div id="div-comment-324079" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/94c7574d0c2d5f02c9fc3fd4d851731b" class="avatar avatar-32" height="32" width="32">			<cite class="fn">dostone</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-324079">
+			2016年08月11日 10:41</a>		</div>
+
+		<p>张老师，移除事件的时候，元素上的事件对象是不是没有移除!。</p>
+<p> var ev = document.createEvent(“HTMLEvents”);<br>
+            ev.initEvent(type, capture || false, false);<br>
+            // 在元素上存储创建的事件，方便自定义触发<br>
+            if (!el[“ev” + type]) {<br>
+                el[“ev” + type] = ev;<br>
+            }</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=324079#respond" onclick="return addComment.moveForm( &quot;div-comment-324079&quot;, &quot;324079&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给dostone">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-323935">
+				<div id="div-comment-323935" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/d8ec42d030a54b4b9c0e756f8df563b0" class="avatar avatar-32" height="32" width="32">			<cite class="fn">鑫粉</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-323935">
+			2016年08月10日 18:43</a>		</div>
+
+		<p>看我的名字···· (之后 华丽的结束符 <img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/icon_wink.gif" alt=";)" class="wp-smiley"><br>
+好文</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=323935#respond" onclick="return addComment.moveForm( &quot;div-comment-323935&quot;, &quot;323935&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给鑫粉">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-321558">
+				<div id="div-comment-321558" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/d7450c10d7903bad72e750103e5822a4" class="avatar avatar-32" height="32" width="32">			<cite class="fn">misalen</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-321558">
+			2016年07月7日 21:43</a>		</div>
+
+		<p>张知识</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=321558#respond" onclick="return addComment.moveForm( &quot;div-comment-321558&quot;, &quot;321558&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给misalen">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-318264">
+				<div id="div-comment-318264" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/4580c19debf84488e0802974a4dd7177" class="avatar avatar-32" height="32" width="32">			<cite class="fn">小狼</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-318264">
+			2016年05月23日 15:05</a>		</div>
+
+		<p>旭哥，，长枪里赛子弹，不是先进后出么。。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=318264#respond" onclick="return addComment.moveForm( &quot;div-comment-318264&quot;, &quot;318264&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给小狼">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-314755">
+				<div id="div-comment-314755" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/d6f39d7bb1a3be4afff8bf7e6ece77da" class="avatar avatar-32" height="32" width="32">			<cite class="fn">kevin</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-314755">
+			2016年04月6日 11:53</a>		</div>
+
+		<p>自定义事件，触发条件是什么啊。比如click事件，是每点击一下就会触发，那自定义事件，是如何实现，这样的，而且事件的执行都是异步的，自定义事件也必须得那样吧</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=314755#respond" onclick="return addComment.moveForm( &quot;div-comment-314755&quot;, &quot;314755&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给kevin">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-313026">
+				<div id="div-comment-313026" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/58647aba4c4698e845333d33260b6b04" class="avatar avatar-32" height="32" width="32">			<cite class="fn">有错</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-313026">
+			2016年03月7日 22:22</a>		</div>
+
+		<p>“众所周知，减少全局变量的方法之一就是使用全局变量”</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=313026#respond" onclick="return addComment.moveForm( &quot;div-comment-313026&quot;, &quot;313026&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给有错">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-2" id="comment-313365">
+				<div id="div-comment-313365" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/5bde97e13012edc5919e8f03fd14ccb7" class="avatar avatar-32" height="32" width="32">			<cite class="fn">.........</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-313365">
+			2016年03月16日 09:23</a>		</div>
+
+		<p>很有道理</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=313365#respond" onclick="return addComment.moveForm( &quot;div-comment-313365&quot;, &quot;313365&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给.........">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-311978">
+				<div id="div-comment-311978" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/10287631a67ff432b8bb35b23899c953" class="avatar avatar-32" height="32" width="32">			<cite class="fn">mark</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-311978">
+			2016年01月23日 11:49</a>		</div>
+
+		<p>} else if (key instanceof Array) {<br>
+                for (var lis=0, lenkey = key.length; liskey[lis] 应该是这样吧？</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=311978#respond" onclick="return addComment.moveForm( &quot;div-comment-311978&quot;, &quot;311978&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给mark">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 parent" id="comment-289502">
+				<div id="div-comment-289502" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/42cd8d15026e5a0385508f305d5615de" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.w3cplus.top/" rel="external nofollow" class="url">carl</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-289502">
+			2015年08月31日 22:20</a>		</div>
+
+		<p>fireEvent: function(type,params) {<br>
+        var arrayEvent = this._listeners[type];<br>
+        if (arrayEvent instanceof Array) {<br>
+            for (var i=0, length=arrayEvent.length; i&lt;length; i+=1) {<br>
+                if (typeof arrayEvent[i] === "function") {<br>
+                   /* arrayEvent[i]({<br>
+                        type: type<br>
+                    });这里不大懂是干嘛的*/<br>
+                    arrayEvent[i](params);//如果这样写传个参过来就更溜了，<br>
+                }<br>
+            }<br>
+        }<br>
+        return this;<br>
+    },</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=289502#respond" onclick="return addComment.moveForm( &quot;div-comment-289502&quot;, &quot;289502&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给carl">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-307669">
+				<div id="div-comment-307669" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/8980b02d70994d35f3cafce422e042db" class="avatar avatar-32" height="32" width="32">			<cite class="fn">qsch</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-307669">
+			2015年12月11日 11:06</a>		</div>
+
+		<p>将事件类型封装到一个对象中作为事件处理函数的第一个参数。就像addEventListener(type, fn, useCapture)会将事件信息封装到e中作为第一个fn的第一个参数</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=307669#respond" onclick="return addComment.moveForm( &quot;div-comment-307669&quot;, &quot;307669&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给qsch">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1 parent" id="comment-124110">
+				<div id="div-comment-124110" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/ce7a76a895d683bf58552bc076d8b324" class="avatar avatar-32" height="32" width="32">			<cite class="fn">lichang</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-124110">
+			2014年09月5日 10:04</a>		</div>
+
+		<p>EventTarget.prototype = {<br>
+    constructor: this,<br>
+   …<br>
+}<br>
+中的this应该是EventTarget吧？不然调用实例的时候指向的是window</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=124110#respond" onclick="return addComment.moveForm( &quot;div-comment-124110&quot;, &quot;124110&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给lichang">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-327301">
+				<div id="div-comment-327301" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/4a6e45393892051ab880d7befdd4ff12" class="avatar avatar-32" height="32" width="32">			<cite class="fn">小小程序员</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-327301">
+			2016年09月18日 21:34</a>		</div>
+
+		<p>yes</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=327301#respond" onclick="return addComment.moveForm( &quot;div-comment-327301&quot;, &quot;327301&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给小小程序员">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-67130">
+				<div id="div-comment-67130" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/7d48fd0395170fc355e86e50db8b5a74" class="avatar avatar-32" height="32" width="32">			<cite class="fn">xcchcaptain</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-67130">
+			2014年04月17日 11:55</a>		</div>
+
+		<p>可否说说，怎么在自定义事件中，使用自定义的参数<br>
+比如说现在事件中只有event参数，如果我想允许传入多个呢</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=67130#respond" onclick="return addComment.moveForm( &quot;div-comment-67130&quot;, &quot;67130&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给xcchcaptain">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1 parent" id="comment-40239">
+				<div id="div-comment-40239" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/adbeaa5f1619dd4045d73fd5f9d12ee5" class="avatar avatar-32" height="32" width="32">			<cite class="fn">stone</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-40239">
+			2013年09月13日 13:09</a>		</div>
+
+		<p>原型模式实现自定义事件 发现一个错误：<br>
+removeEvent函数里面<br>
+if (listeners[i] === listener) 应该为 if (listeners[i] === key)</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=40239#respond" onclick="return addComment.moveForm( &quot;div-comment-40239&quot;, &quot;40239&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给stone">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment byuser comment-author-admin bypostauthor even depth-2" id="comment-40260">
+				<div id="div-comment-40260" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/3e58242902fa8f33162f3f10df892c68" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.zhangxinxu.com/" rel="external nofollow" class="url">张 鑫旭</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-40260">
+			2013年09月13日 18:19</a>		</div>
+
+		<p>@stone 多谢提醒，已修正。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=40260#respond" onclick="return addComment.moveForm( &quot;div-comment-40260&quot;, &quot;40260&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给张 鑫旭">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-39507">
+				<div id="div-comment-39507" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/5fb6736df5ccbfe38bbd9695f81e2cb0" class="avatar avatar-32" height="32" width="32">			<cite class="fn">吕大豹</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-39507">
+			2013年08月31日 21:23</a>		</div>
+
+		<p>虽然小弟的js也很薄弱，但是细细看了这篇文章两遍之后还是发现有一些质疑：<br>
+1.博主的“事件”与“事件监听器”两个概念混淆在一块了。比如写到removeEventListenter是删除自定义事件的方法，但是这个明显是用来移除事件监听函数的，跟删除自定义事件没什么关系吧~<br>
+2.对“自定义事件”这个概念有不同理解，核心是“自定义”，应该是说可以自己来描述一个事件的定义，比如定义一个tripleclick(三击)，核心应该是描述清楚这个三击到底是什么含义，就是连续点击三次鼠标后dispatchEvent这个tripleclick<br>
+上述两点无根无据，个人理解：）</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=39507#respond" onclick="return addComment.moveForm( &quot;div-comment-39507&quot;, &quot;39507&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给吕大豹">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-32947">
+				<div id="div-comment-32947" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/3e58242902fa8f33162f3f10df892c68" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.zhangxinxu.com/wordpress/" rel="external nofollow" class="url">张鑫旭</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-32947">
+			2013年04月16日 17:26</a>		</div>
+
+		<p>@after9 确实是，已修正，多谢提醒。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=32947#respond" onclick="return addComment.moveForm( &quot;div-comment-32947&quot;, &quot;32947&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给张鑫旭">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-23872">
+				<div id="div-comment-23872" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/b4d5b0b4fbb10e7e4af962abd21f3ed1" class="avatar avatar-32" height="32" width="32">			<cite class="fn">after9</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-23872">
+			2012年11月23日 22:27</a>		</div>
+
+		<p>弱弱的说句, “createEvent()方法返回新创建的Event对象，支持一个参数，表示事件类型，具体见下表：” 下面的表格, iniEvent应该是initEvent吧…</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=23872#respond" onclick="return addComment.moveForm( &quot;div-comment-23872&quot;, &quot;23872&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给after9">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-22184">
+				<div id="div-comment-22184" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/c3aacaf9991577ec4ae3c01ec2b8b7c3" class="avatar avatar-32" height="32" width="32">			<cite class="fn">绿茶</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-22184">
+			2012年10月13日 21:05</a>		</div>
+
+		<p>额，还是dean edward实现的dom自定义事件比较巧妙</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=22184#respond" onclick="return addComment.moveForm( &quot;div-comment-22184&quot;, &quot;22184&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给绿茶">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-20185">
+				<div id="div-comment-20185" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/04b14dc1584e08f1e0fbb5bc1dc7a968" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://viken2.info/" rel="external nofollow" class="url">瞬间的永恒</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-20185">
+			2012年08月6日 16:03</a>		</div>
+
+		<p>最近正好在学习js自定义事件，这篇文章很值得学习</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=20185#respond" onclick="return addComment.moveForm( &quot;div-comment-20185&quot;, &quot;20185&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给瞬间的永恒">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-19284">
+				<div id="div-comment-19284" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/7600ce82fec8a01f218ba75fb44f56b3" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.web6g.com/" rel="external nofollow" class="url">可可</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-19284">
+			2012年07月12日 17:52</a>		</div>
+
+		<p>如何给伪DOM对象添加一个自定义事件，当对象的一个属性值发生改变时触发此事件（非IE浏览器中）。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=19284#respond" onclick="return addComment.moveForm( &quot;div-comment-19284&quot;, &quot;19284&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给可可">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-19060">
+				<div id="div-comment-19060" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/dd745e705a6bd063e50ded1c0fd5620e" class="avatar avatar-32" height="32" width="32">			<cite class="fn">VVG</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-19060">
+			2012年07月4日 09:27</a>		</div>
+
+		<p>你有没有觉得这种行为表现有点类似于往长枪里面塞子弹(add)，（扣动扳手 – click）发射的时候按照塞进去的顺序依次出来。</p>
+<p>这个比喻太恰当了，赞</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=19060#respond" onclick="return addComment.moveForm( &quot;div-comment-19060&quot;, &quot;19060&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给VVG">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment even depth-2" id="comment-34430">
+				<div id="div-comment-34430" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/422cdfa88dca9287441778155b6c63fd" class="avatar avatar-32" height="32" width="32">			<cite class="fn">四度冰点</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-34430">
+			2013年05月31日 10:38</a>		</div>
+
+		<p>不是很恰当，因为貌似事件是按注入顺序执行的，枪弹出来是倒序的。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=34430#respond" onclick="return addComment.moveForm( &quot;div-comment-34430&quot;, &quot;34430&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给四度冰点">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-18339">
+				<div id="div-comment-18339" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/236b9dfb56c604fc47a20ed3649bf8ec" class="avatar avatar-32" height="32" width="32">			<cite class="fn">小月</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-18339">
+			2012年06月6日 15:34</a>		</div>
+
+		<p>// 触发<br>
+    fireEvent: function(type) {<br>
+        var arrayEvent = this._listeners[type];<br>
+        if (arrayEvent instanceof Array) {<br>
+            for (var i=0, length=arrayEvent.length; i&lt;length; i+=1) {<br>
+                if (typeof arrayEvent[i] === "function") {<br>
+                    arrayEvent[i]({ type: type });<br>
+                }<br>
+            }<br>
+        }<br>
+        return this;<br>
+    },</p>
+<p>中 arrayEvent[i]({ type: type }); 是什么意思，传入{tpyp:type}的作用是什么？ 属于js 中的什么语法，期待你的回复。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=18339#respond" onclick="return addComment.moveForm( &quot;div-comment-18339&quot;, &quot;18339&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给小月">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-17962">
+				<div id="div-comment-17962" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/5069f65804d2a4c9f1022b9bf7e6e32f" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.byhard.com/" rel="external nofollow" class="url">海纳百川</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-17962">
+			2012年05月21日 11:04</a>		</div>
+
+		<p>很精典，学习啦。</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=17962#respond" onclick="return addComment.moveForm( &quot;div-comment-17962&quot;, &quot;17962&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给海纳百川">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-17497">
+				<div id="div-comment-17497" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/e09b05859d5c85562de7e90dfaca4e8c" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.baidu.com/" rel="external nofollow" class="url">七哥</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-17497">
+			2012年04月28日 16:34</a>		</div>
+
+		<p>强力插入，，，，</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=17497#respond" onclick="return addComment.moveForm( &quot;div-comment-17497&quot;, &quot;17497&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给七哥">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-17274">
+				<div id="div-comment-17274" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/f9f4945f8a7dfc80714e1b97fbc193ca" class="avatar avatar-32" height="32" width="32">			<cite class="fn">路过</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-17274">
+			2012年04月17日 12:12</a>		</div>
+
+		<p>楼主写了这么一大堆，其实放上五个字就可以了———“观察者模式”</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=17274#respond" onclick="return addComment.moveForm( &quot;div-comment-17274&quot;, &quot;17274&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给路过">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-17150">
+				<div id="div-comment-17150" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/ed4e21a4af07c3f543c39ebe216c61f0" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://www.lifefrom.com/" rel="external nofollow" class="url">郭碗瓢盆</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-17150">
+			2012年04月11日 19:58</a>		</div>
+
+		<p>希望博主回访留个链接~ 你这里有很多我可以学习的东西喔~  嘿嘿</p>
+<p>谢谢~</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=17150#respond" onclick="return addComment.moveForm( &quot;div-comment-17150&quot;, &quot;17150&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给郭碗瓢盆">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-17049">
+				<div id="div-comment-17049" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/c6bba6bc516375311cd020b24232462b" class="avatar avatar-32" height="32" width="32">			<cite class="fn">J_5888</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-17049">
+			2012年04月6日 10:52</a>		</div>
+
+		<p>element.onclick = function() {<br>
+   // 我是临时工<br>
+};</p>
+<p>这段得让DOM加载完后才能绑定元素，<br>
+放在底部就OK了。</p>
+<p>ie为 attachEvent;</p>
+<p>//!ie内核浏览器<br>
+element.addEventListener(“click”, function() {<br>
+// 我是临时工<br>
+});</p>
+<p>//ie内核浏览器<br>
+element.attachEvent(“onclick”, function() {<br>
+// 我是临时工<br>
+});</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=17049#respond" onclick="return addComment.moveForm( &quot;div-comment-17049&quot;, &quot;17049&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给J_5888">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment odd alt thread-even depth-1" id="comment-16970">
+				<div id="div-comment-16970" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/7060dfb9a4706f749898fb7b915aa5da" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://fanfou.com/ruif" rel="external nofollow" class="url">riophae</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-16970">
+			2012年04月1日 19:35</a>		</div>
+
+		<p>嗯, 我是自己造了一个事件系统, 因为是用来处理自定义事件的, 绑定对象是数据, 所以完全脱离了　DOM.　已经写了　600 多行写到快吐了..</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=16970#respond" onclick="return addComment.moveForm( &quot;div-comment-16970&quot;, &quot;16970&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给riophae">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1 parent" id="comment-16969">
+				<div id="div-comment-16969" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/7060dfb9a4706f749898fb7b915aa5da" class="avatar avatar-32" height="32" width="32">			<cite class="fn"><a href="http://fanfou.com/ruif" rel="external nofollow" class="url">riophae</a></cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-16969">
+			2012年04月1日 19:13</a>		</div>
+
+		<p>沙发.　这些天正在写事件系统.　快折腾死了.</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=16969#respond" onclick="return addComment.moveForm( &quot;div-comment-16969&quot;, &quot;16969&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给riophae">回复</a></div>
+				</div>
+		<ul class="children">
+		<li class="comment odd alt depth-2" id="comment-336270">
+				<div id="div-comment-336270" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/60a95f5003922a92303b32d7a1bfd279" class="avatar avatar-32" height="32" width="32">			<cite class="fn">恩</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-336270">
+			2016年11月22日 18:25</a>		</div>
+
+		<p>好的</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=336270#respond" onclick="return addComment.moveForm( &quot;div-comment-336270&quot;, &quot;336270&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给恩">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-even depth-1" id="comment-16967">
+				<div id="div-comment-16967" class="comment-body">
+				<div class="comment-author vcard">
+			<img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/93664396e7065546c75aa020f7f9b343" class="avatar avatar-32" height="32" width="32">			<cite class="fn">金科路码农</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%e8%87%aa%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6/comment-page-1/#comment-16967">
+			2012年04月1日 18:32</a>		</div>
+
+		<p>你都弱了。。。让我们这些低等码农 情以何堪</p>
+
+		<div class="reply"><a class="comment-reply-link" href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/?replytocom=16967#respond" onclick="return addComment.moveForm( &quot;div-comment-16967&quot;, &quot;16967&quot;, &quot;respond&quot;, &quot;2330&quot; )" aria-label="回复给金科路码农">回复</a></div>
+				</div>
+		</li><!-- #comment-## -->
+	</ol>
+
+	<div class="navigation">
+		<div class="alignleft"></div>
+		<div class="alignright"></div>
+	</div>
+ 
+
+
+
+	
+	</div>
+</div>
+	<div id="sidebar" role="complementary">
+        <div id="zxx_intro" class="sldebar_out">
+            <div class="silebar_inner" itemscope="" itemtype="http://data-vocabulary.org/Person">
+                <img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/zxx_90_0824.jpg" itemprop="photo" class="zxx_head_image">
+                <div class="zxx_some_info">
+                    <p class="mb10"><span itemprop="name" class="fn">张鑫旭</span><sup><a itemprop="url" href="http://www.zhangxinxu.com/life/about/">more</a></sup>，09年<a href="http://www.hust.edu.cn/">华中科技大学</a>毕业，目前<span itemprop="location">上海</span>，现就职<a href="http://www.yuewen.com/" itemprop="organization">阅文集团</a>，资深钓鱼爱好者，专注<span itemprop="role">web前端</span>偏前领域。</p>
+
+                    <p>邮箱：<span style="font-family:arial;">zhangxinxu@zhangxinxu.com</span></p>
+                    <p>微博：<a href="http://weibo.com/zhangxinxu">新浪</a> <a href="http://t.qq.com/iamzhangxinxu">腾讯</a></p>
+                </div>
+                <div class="clear"></div>                
+            </div>
+        </div>
+        
+        <div id="topAdOut" class="sldebar_out top_ad_out" style="display:block!important;">
+            <div class="top_ad" style="display:block!important;">
+            	<div id="adSlideX" class="ad_slide_x" style="display: block !important; left: -672px;">
+                    <div class="ad_inner">
+                        <a href="http://www.yidengxuetang.com/recruit/?hmsr=zxx_gaoduan_web_0204" target="_blank" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;YIDENG&#39;, &#39;yideng&#39;, &#39;Top Ad&#39;]);"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/zhijia.png" width="336" height="300"></a>
+                    </div><div class="ad_inner">
+                        <a href="http://www.zhinengshe.com/?utm_source=zxx-web&amp;utm_medium=banner&amp;utm_term=s2&amp;utm_content=2016&amp;utm_campaign=zz" target="_blank" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;zhNsh&#39;, &#39;zhiNshe&#39;, &#39;Top Ad&#39;]);"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/zhiNshe-n.png" srcset="http://image.zhangxinxu.com/image/blog/201607/zhiNshe.png 2x" width="336" height="300"></a>
+                    </div><div class="ad_inner" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;MWAD&#39;, &#39;MiaoWei&#39;, &#39;Top Ad&#39;]);">
+                        <a href="http://www.miaov.com/?form=zhangxinxu.com" target="_blank"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/mv336X300.jpg" width="336" height="300"></a>
+                    </div>
+                </div>
+                <!-- 索引 -->
+                <div id="adIndexX" class="ad_index_x">
+                	<a href="javascript:" class="ad_index_a">1</a>
+                    <a href="javascript:" class="ad_index_a">2</a>
+                    <a href="javascript:" class="ad_index_a active">3</a>
+                </div>
+            </div>
+        </div><script>if (window.location != window.parent.location) { window.parent.location = window.location; }</script>    	<div class="sldebar_out">
+            <div class="silebar_inner slide_list">
+                <ul>
+                    <li id="search-3" class="widget widget_search"><form method="get" id="searchform" action="http://www.zhangxinxu.com/wordpress/">
+<label class="hidden" for="s">Search for:</label>
+<div><input type="search" placeholder="翻页太辛苦，试试直接搜索" value="" name="s" id="s">
+<input type="submit" id="searchsubmit" data-value="Search" value="搜索">
+</div>
+</form>
+</li><li id="categories-4" class="widget widget_categories"><h2 class="widgettitle">文章分类</h2>		<ul>
+	<li class="cat-item cat-item-3"><a href="http://www.zhangxinxu.com/wordpress/category/css/">css相关</a> (238)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.zhangxinxu.com/wordpress/category/graphic/">graphic相关</a> (68)
+<ul class="children">
+	<li class="cat-item cat-item-81"><a href="http://www.zhangxinxu.com/wordpress/category/graphic/as3%e8%8f%9c%e5%8d%95/">as3菜单</a> (32)
+</li>
+	<li class="cat-item cat-item-896"><a href="http://www.zhangxinxu.com/wordpress/category/graphic/canvas-graphic/">canvas相关</a> (10)
+</li>
+	<li class="cat-item cat-item-895"><a href="http://www.zhangxinxu.com/wordpress/category/graphic/svg-graphic/">SVG相关</a> (24)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-1097"><a href="http://www.zhangxinxu.com/wordpress/category/html%e7%9b%b8%e5%85%b3/">HTML相关</a> (21)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.zhangxinxu.com/wordpress/category/js/">js相关</a> (123)
+<ul class="children">
+	<li class="cat-item cat-item-60"><a href="http://www.zhangxinxu.com/wordpress/category/js/jquery-about/">jquery相关</a> (43)
+</li>
+	<li class="cat-item cat-item-180"><a href="http://www.zhangxinxu.com/wordpress/category/js/js%e5%ae%9e%e4%be%8b/">js实例</a> (63)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-648"><a href="http://www.zhangxinxu.com/wordpress/category/mobile%e7%9b%b8%e5%85%b3/">mobile相关</a> (11)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.zhangxinxu.com/wordpress/category/ps/">ps相关</a> (13)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.zhangxinxu.com/wordpress/category/web/">web综合</a> (40)
+</li>
+	<li class="cat-item cat-item-198"><a href="http://www.zhangxinxu.com/wordpress/category/%e5%a4%96%e6%96%87%e7%bf%bb%e8%af%91/">外文翻译</a> (37)
+</li>
+		</ul>
+</li><li id="archives-3" class="widget widget_archive"><h2 class="widgettitle">文章存档</h2>		<ul>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2017/03/">2017年三月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2017/02/">2017年二月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2017/01/">2017年一月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/12/">2016年十二月</a>&nbsp;(2)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/11/">2016年十一月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/10/">2016年十月</a>&nbsp;(2)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/09/">2016年九月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/08/">2016年八月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/07/">2016年七月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/06/">2016年六月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/05/">2016年五月</a>&nbsp;(2)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/04/">2016年四月</a>&nbsp;(2)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/03/">2016年三月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/02/">2016年二月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2016/01/">2016年一月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/12/">2015年十二月</a>&nbsp;(2)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/11/">2015年十一月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/10/">2015年十月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/08/">2015年八月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/07/">2015年七月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/06/">2015年六月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/05/">2015年五月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/04/">2015年四月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/03/">2015年三月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/02/">2015年二月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2015/01/">2015年一月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/12/">2014年十二月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/11/">2014年十一月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/10/">2014年十月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/09/">2014年九月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/08/">2014年八月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/07/">2014年七月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/06/">2014年六月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/05/">2014年五月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/04/">2014年四月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/03/">2014年三月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/02/">2014年二月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2014/01/">2014年一月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/12/">2013年十二月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/11/">2013年十一月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/10/">2013年十月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/09/">2013年九月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/08/">2013年八月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/07/">2013年七月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/06/">2013年六月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/05/">2013年五月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/04/">2013年四月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/03/">2013年三月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/02/">2013年二月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2013/01/">2013年一月</a>&nbsp;(10)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/12/">2012年十二月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/11/">2012年十一月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/10/">2012年十月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/09/">2012年九月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/08/">2012年八月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/07/">2012年七月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/06/">2012年六月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/05/">2012年五月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/04/">2012年四月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/03/">2012年三月</a>&nbsp;(9)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/02/">2012年二月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2012/01/">2012年一月</a>&nbsp;(4)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/12/">2011年十二月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/11/">2011年十一月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/10/">2011年十月</a>&nbsp;(3)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/09/">2011年九月</a>&nbsp;(9)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/08/">2011年八月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/07/">2011年七月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/06/">2011年六月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/05/">2011年五月</a>&nbsp;(8)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/04/">2011年四月</a>&nbsp;(8)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/03/">2011年三月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/02/">2011年二月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2011/01/">2011年一月</a>&nbsp;(5)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/12/">2010年十二月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/11/">2010年十一月</a>&nbsp;(8)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/10/">2010年十月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/09/">2010年九月</a>&nbsp;(10)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/08/">2010年八月</a>&nbsp;(10)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/07/">2010年七月</a>&nbsp;(10)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/06/">2010年六月</a>&nbsp;(8)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/05/">2010年五月</a>&nbsp;(11)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/04/">2010年四月</a>&nbsp;(14)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/03/">2010年三月</a>&nbsp;(11)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/02/">2010年二月</a>&nbsp;(1)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/">2010年一月</a>&nbsp;(16)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2009/12/">2009年十二月</a>&nbsp;(14)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2009/11/">2009年十一月</a>&nbsp;(7)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2009/10/">2009年十月</a>&nbsp;(6)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2009/09/">2009年九月</a>&nbsp;(36)</li>
+	<li><a href="http://www.zhangxinxu.com/wordpress/2009/08/">2009年八月</a>&nbsp;(12)</li>
+		</ul>
+</li>		<li id="recent-posts-3" class="widget widget_recent_entries">		<h2 class="widgettitle">最新文章</h2>		<ul>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/">CSS font-family常见中文字体对应的英文名称</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/03/canvas-2d-cool-affect-skills-technology/">canvas 2D炫酷动效的实现套路和需要的技术积累</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/03/transparent-jpg-svg/">【翻译】借助SVG实现背景透明JPG图片</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/03/offset-path-css-animation/">使用CSS offset-path让元素沿着不规则路径运动</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/02/font-kerning-font-smoothing-font-variant/">了解CSS属性font-kerning,font-smoothing,font-variant</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/02/cicada-principle-css3-randomisation-multiple-backgrounds-border-radius/">“蝉原则”与CSS3随机多背景随机圆角等效果</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/02/page-link-url-history-null-not-record/">小tips: 页面链接跳转历史URL不记录的兼容处理</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/02/css3-multiple-column-layout-read-horizontal/">基于CSS3 column多栏布局实现水平滑页翻页交互</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/02/js-page-url-document-referrer/">JS获取上一访问页面URL地址document.referrer实践</a>
+						</li>
+					<li>
+				<a href="http://www.zhangxinxu.com/wordpress/2017/01/mobile-phone-drag-drop-inertia-loading/">开源移动端元素拖拽惯性弹动以及下拉加载两个JS</a>
+						</li>
+				</ul>
+		</li><li id="overall-top-10-posts" class="widget widget_dailytopten_overall"><h2 class="widgettitle">热门总排行</h2><ul>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/">好吧，CSS3 3D transform变换，不过如此！</a> (380511)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/12/jquery-powerfloat%e4%b8%87%e8%83%bd%e6%b5%ae%e5%8a%a8%e5%b1%82%e4%b8%8b%e6%8b%89%e5%b1%82%e6%8f%92%e4%bb%b6/">jQuery powerFloat万能浮动层下拉层插件</a> (361099)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2011/09/%e5%9f%ba%e4%ba%8ehtml5%e7%9a%84%e5%8f%af%e9%a2%84%e8%a7%88%e5%a4%9a%e5%9b%be%e7%89%87ajax%e4%b8%8a%e4%bc%a0/">基于HTML5的可预览多图片Ajax上传</a> (360494)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%e5%b1%9e%e6%80%a7%ef%bc%8c%e7%84%b6%e5%90%8e%e5%bc%b9%e6%80%a7%e7%9b%92%e5%ad%90%e6%a8%a1%e5%9e%8b%e7%ae%80%e4%bb%8b/">CSS box-flex属性，然后弹性盒子模型简介</a> (294672)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/03/every-browser-support-html5-video/">让所有浏览器支持HTML5 video视频标签</a> (290445)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/jquery-pagination-ajax%e5%88%86%e9%a1%b5%e6%8f%92%e4%bb%b6%e4%b8%ad%e6%96%87%e8%af%a6%e8%a7%a3/">jQuery Pagination Ajax分页插件中文详解</a> (279955)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/11/%e6%8b%9c%e6%8b%9c%e4%ba%86%e6%b5%ae%e5%8a%a8%e5%b8%83%e5%b1%80-%e5%9f%ba%e4%ba%8edisplayinline-block%e7%9a%84%e5%88%97%e8%a1%a8%e5%b8%83%e5%b1%80/">拜拜了,浮动布局-基于display:inline-block的列表布局</a> (271942)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/04/%e8%ae%a9ie6ie7ie8%e6%b5%8f%e8%a7%88%e5%99%a8%e6%94%af%e6%8c%81css3%e5%b1%9e%e6%80%a7/">让IE6/IE7/IE8浏览器支持CSS3属性</a> (266657)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/06/css3-transform-matrix-%e7%9f%a9%e9%98%b5/">理解CSS3 transform中的Matrix(矩阵)</a> (243223)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2009/09/%e5%85%b3%e4%ba%8e%e6%96%87%e5%ad%97%e5%86%85%e5%ae%b9%e6%ba%a2%e5%87%ba%e7%94%a8%e7%82%b9%e7%82%b9%e7%82%b9-%e7%9c%81%e7%95%a5%e5%8f%b7%e8%a1%a8%e7%a4%ba/">关于文字内容溢出用点点点(...)省略号表示</a> (223150)</li>
+</ul>
+</li><li id="daily-top-10-posts" class="widget widget_dailytopten"><h2 class="widgettitle">今日热门</h2><ul>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/03/every-browser-support-html5-video/">让所有浏览器支持HTML5 video视频标签</a> (328)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/09/css3-3d-transform-perspective-animate-transition/">好吧，CSS3 3D transform变换，不过如此！</a> (289)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2011/09/%e5%9f%ba%e4%ba%8ehtml5%e7%9a%84%e5%8f%af%e9%a2%84%e8%a7%88%e5%a4%9a%e5%9b%be%e7%89%87ajax%e4%b8%8a%e4%bc%a0/">基于HTML5的可预览多图片Ajax上传</a> (246)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/11/%e6%8b%9c%e6%8b%9c%e4%ba%86%e6%b5%ae%e5%8a%a8%e5%b8%83%e5%b1%80-%e5%9f%ba%e4%ba%8edisplayinline-block%e7%9a%84%e5%88%97%e8%a1%a8%e5%b8%83%e5%b1%80/">拜拜了,浮动布局-基于display:inline-block的列表布局</a> (232)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/04/css%e5%ae%9e%e7%8e%b0%e5%85%bc%e5%ae%b9%e6%80%a7%e7%9a%84%e6%b8%90%e5%8f%98%e8%83%8c%e6%99%afgradient%e6%95%88%e6%9e%9c/">CSS实现兼容性的渐变背景(gradient)效果</a> (232)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%e5%b1%9e%e6%80%a7%ef%bc%8c%e7%84%b6%e5%90%8e%e5%bc%b9%e6%80%a7%e7%9b%92%e5%ad%90%e6%a8%a1%e5%9e%8b%e7%ae%80%e4%bb%8b/">CSS box-flex属性，然后弹性盒子模型简介</a> (215)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%e5%8e%bb%e9%99%a4%e9%97%b4%e8%b7%9d/">去除inline-block元素间间距的N种方法</a> (211)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/04/%e8%ae%a9ie6ie7ie8%e6%b5%8f%e8%a7%88%e5%99%a8%e6%94%af%e6%8c%81css3%e5%b1%9e%e6%80%a7/">让IE6/IE7/IE8浏览器支持CSS3属性</a> (208)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/01/jquery-pagination-ajax%e5%88%86%e9%a1%b5%e6%8f%92%e4%bb%b6%e4%b8%ad%e6%96%87%e8%af%a6%e8%a7%a3/">jQuery Pagination Ajax分页插件中文详解</a> (184)</li>
+<li><a href="http://www.zhangxinxu.com/wordpress/2010/10/%e6%88%91%e6%89%80%e7%9f%a5%e9%81%93%e7%9a%84%e5%87%a0%e7%a7%8ddisplaytable-cell%e7%9a%84%e5%ba%94%e7%94%a8/">我所知道的几种display:table-cell的应用</a> (173)</li>
+</ul>
+</li>                </ul>
+            </div>
+        </div>
+	</div>
+<div id="footer" role="contentinfo">
+<p>
+Powered by <a href="http://wordpress.org/">WordPress</a> | Designed by <a href="http://www.zhangxinxu.com/">zhangxinxu</a><br>
+Copyright© 2009-2017 张鑫旭-鑫空间-鑫生活<br>
+<a target="_blank" href="http://www.miibeian.gov.cn/">鄂ICP备09015569号</a>
+</p>
+</div>
+<script src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/logger.js"></script></div>
+
+
+<script type="text/javascript" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/form.js"></script>
+<script type="text/javascript" src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/comment-reply.min.js"></script>
+
+<div id="footbar" role="toolbar">
+	<div class="foot_yy_x hidden" id="footYyX">
+    	<div class="foot_yy_title">
+        	<span class="l">我的应用</span>
+            <a href="javascript:" class="r" id="footYYClose">-</a>
+        </div>
+        <div class="ml10 mr10 foot_yy_dv">工具与应用</div>
+        <div class="mt5">
+        	<a class="foot_yy_a" href="http://www.zhangxinxu.com/sp/base64.html">图片转base64(拖进来)</a>
+			<a class="foot_yy_a" href="http://browserhacks.com/">浏览器hack</a>
+            <a class="foot_yy_a" href="http://cubic-bezier.com/">CSS贝塞尔曲线可视化</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/sp/css-compress-mini.html">CSS在线压缩工具</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/sp/calculator.html">简易在线计算器</a>
+        </div>
+        <div class="ml10 mr10 foot_yy_dv">在线资源</div>
+        <div class="mt5">
+        	<a class="foot_yy_a" href="http://www.zhangxinxu.com/jq/api14/">jQuery 1.4 API中文版</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/GitHub/demo-Snap.svg/demo/basic/">Snap.svg中文文档</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/jq/stylus/">stylus中文版参考文档</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/css3/">CSS3中文共享参考指南</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/sp/character.html">非主流字符及字符图案</a>
+            <a class="foot_yy_a" href="http://www.zhangxinxu.com/jq/mt/">MooTools 1.2中文文档</a>
+        </div>
+        <div>&nbsp;</div>
+        <a href="javascript:" class="foot_yy foot_yy_on nowrap" id="footYYOff"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/zxx_ico.png" class="vimg"> 我的应用</a>
+    </div>
+    <a href="javascript:" class="foot_yy nowrap" id="footYYShow"><img src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/zxx_ico.png" class="vimg"> 我的应用</a>
+    <span class="foot_rss l">
+    	<a class="foot_rss_a" href="http://www.zhangxinxu.com/wordpress/?feed=rss2">文章(RSS)</a>
+         
+    </span>
+    <a href="http://www.zhangxinxu.com/wordpress/2012/04/js-dom%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6/#" id="backToTop" class="foot_top">返回顶部↑</a>
+	<a href="http://www.zhangxinxu.com/wordpress/wp-login.php" class="foot_login"><i class="icon-male"></i>登录</a>
+</div>
+
+<script src="./漫谈js自定义事件、DOM_伪DOM自定义事件 « 张鑫旭-鑫空间-鑫生活_files/script-min.js"></script>
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11205167-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body><div></div></html>

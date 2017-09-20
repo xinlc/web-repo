@@ -1,0 +1,22 @@
+96dpi   1px = 1/96in
+		1pt = 1/72in                 1in = 72pt
+		
+		1px = 0.75pt = 1/96*72in     72/96 = 0.75pt
+		1pt = 1.33px = 1*96/72       96/72 = 1.33px
+		
+all     px = pt * DPI / 72
+        pt = px / DPI * 72
+
+
+
+px to pd
+160ppi 是标准
+
+公式：pd to px
+     pd * (ppi / 160) = px
+
+     px to pd
+     px / (ppi / 160) = pd	
+
+1pd * (320ppi / 160ppi) = 2px
+2px / (320ppi / 16oppi) = 1pd
