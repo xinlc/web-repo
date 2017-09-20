@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+$colorfff:#fff;
+$gap:5px;
+
+html {
+    font-size: 125%;   /* 基数设置为 20px, 20 / 16 = 1.25 */
+}
+
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 156% !important;
+    }
+}
+@media only screen and (min-width: 561px){
+    // html {
+    //     font-size: 172% !important;
+    // }
+}
+@media only screen and (min-width: 641px){
+    // html {
+    //     font-size: 188% !important;
+    // }
+    #app > section {
+      max-width: 641px;
+    }
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    font-size: .7rem;
+    color: #313131;
+    // overflow-x: hidden;
+    overflow: hidden;
+    line-height: 1;
+    //background: url('../images/loading.gif') no-repeat center 250px;
+}
+
+#app {
+    height: 100%;
+    background-color: #dcdcdc;
+    font-size: .7rem;
+}
+
+#app > section {
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.mt5 {
+    margin-top: $gap;
+}
+
+.mt10 {
+    margin-top: $gap*2;
+}
+
+.clear {
+    zoom: 1;
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.display-flex {
+    display: -moz-box;
+    /* Firefox */
+    display: -ms-flexbox;
+    /* IE10 */
+    display: -webkit-box;
+    /* Safari */
+    display: -webkit-flex;
+    /* Chrome, WebKit */
+    display: flexbox;
+    display: flex;
+}
+
+.break {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-avatar {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #F3F3F3;
+}
