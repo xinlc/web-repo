@@ -1,0 +1,34 @@
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//chrome
+
+.ellipsis-more-webkit{
+    width:100%;
+    height: 50px;
+    line-height: 25px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;/*行数*/
+    -webkit-box-orient: vertical; /* 方向 */
+    overflow: hidden;
+}
+
+
+$(".ellipsis-more").each(function(i){
+    var divH = $(this).height();
+    var $p = $("p", $(this)).eq(0);
+    /**一般是2分法截断，但是考虑到文本里分为三种：中文字、英文字、字符；一般来说，中文字=2英文字=2字符。因此最坏情况可能前面一半字符全部是英文，
+    后面一半文本全部是中文，这样二分法就会截取到25%的高度，因此考虑到最坏情况，需要3倍才截断**/
+    while($p.outerHeight()>=divH*3){
+        $p.text($p.text().substring(0,$p.text().length/2));
+    }
+    while ($p.outerHeight() > divH) {
+        $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
+    };
+});
+
+width:140px;（定宽） overflow:hidden; white-space: nowrap; text-overflow: ellipsis;
